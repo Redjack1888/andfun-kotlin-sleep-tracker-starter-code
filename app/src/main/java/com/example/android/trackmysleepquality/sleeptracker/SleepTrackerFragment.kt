@@ -41,12 +41,15 @@ class SleepTrackerFragment : Fragment() {
      *
      * This function uses DataBindingUtil to inflate R.layout.fragment_sleep_quality.
      */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         // Get a reference to the binding object and inflate the fragment views.
         val binding: FragmentSleepTrackerBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_sleep_tracker, container, false)
+            inflater, R.layout.fragment_sleep_tracker, container, false
+        )
 
         val application = requireNotNull(this.activity).application
 
@@ -56,7 +59,8 @@ class SleepTrackerFragment : Fragment() {
 
         val sleepTrackerViewModel =
             ViewModelProvider(
-                this, viewModelFactory)[SleepTrackerViewModel::class.java]
+                this, viewModelFactory
+            )[SleepTrackerViewModel::class.java]
 
         binding.sleepTrackerViewModel = sleepTrackerViewModel
 
@@ -64,11 +68,12 @@ class SleepTrackerFragment : Fragment() {
 
         sleepTrackerViewModel.navigateToSleepQuality.observe(viewLifecycleOwner, { night ->
             night?.let {
-                            this.findNavController().navigate(
-                                SleepTrackerFragmentDirections
-                                    .actionSleepTrackerFragmentToSleepQualityFragment(night.nightId))
-                            sleepTrackerViewModel.doneNavigating()
-                        }
+                this.findNavController().navigate(
+                    SleepTrackerFragmentDirections
+                        .actionSleepTrackerFragmentToSleepQualityFragment(night.nightId)
+                )
+                sleepTrackerViewModel.doneNavigating()
+            }
         })
 
         sleepTrackerViewModel.showSnackBarEvent.observe(viewLifecycleOwner, {

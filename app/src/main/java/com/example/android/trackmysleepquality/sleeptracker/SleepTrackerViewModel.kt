@@ -89,7 +89,7 @@ class SleepTrackerViewModel(
         }
     }
 
-    private suspend fun getTonightFromDatabase():  SleepNight? {
+    private suspend fun getTonightFromDatabase(): SleepNight? {
         return withContext(Dispatchers.IO) {
             var night = database.getTonight()
 
@@ -110,7 +110,7 @@ class SleepTrackerViewModel(
         }
     }
 
-    private suspend fun insert(night: SleepNight){
+    private suspend fun insert(night: SleepNight) {
         withContext(Dispatchers.IO) {
             database.insert(night)
         }
